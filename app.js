@@ -10,7 +10,42 @@ var interval;
 $(document).ready(function() {
 	context = canvas.getContext("2d");
 	Start();
+	initialize();
+
 });
+
+initialize = () => {
+	$('#mainGamePage').hide();
+	$('#registerPage').hide();
+	$('#loginPage').hide();
+	$('#registerBtn').click(function(){
+		$('#welcomePage').toggle();
+		$('#registerPage').toggle();
+	});
+	$('#loginBtn').click(function(){
+		$('#welcomePage').toggle();
+		$('#loginPage').toggle();
+	});
+}
+
+
+
+// function myfunc(){
+// 	let x = document.getElementById("mainGamePage");
+// 	if(x.style.display === "collapse"){
+// 		x.style.display = "expand";
+// 	}
+// 	else{
+// 		x.style.display = "collapse";
+// 	}
+// 	// x.style.display = "block";
+
+// 	context = canvas.getContext("2d");
+// 	Start();
+// }
+
+
+
 
 function Start() {
 	board = new Array();
