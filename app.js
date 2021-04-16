@@ -6,12 +6,22 @@ var pac_color;
 var start_time;
 var time_elapsed;
 var interval;
+var users = {};
+/*
+user :
+{
+	username: string,
+	password: string,
+	full_name: string,
+	email: string,
+	birth_date: Date,
+}
+*/
 
 $(document).ready(function() {
 	context = canvas.getContext("2d");
 	Start();
 	initialize();
-
 });
 
 initialize = () => {
