@@ -21,56 +21,34 @@ user :
 $(document).ready(function() {
 	context = canvas.getContext("2d");
 	Start();
+	initialize();
+});
+
+initialize = () => {
 	user = {
 		username: "k",
 		password: "k"
 	}
 	users[user.username] = user;
-	initialize();
-});
-
-initialize = () => {
 	$('#mainGamePage').hide();
 	$('#registerPage').hide();
 	$('#loginPage').hide();
+	$('#loginAlert').hide();
 	closeBtns();
 	$('#registerBtn').click(function(){
 		$('#welcomePage').toggle();
 		$('#registerPage').toggle();
+
+		// part of validation
+		addRules();
+		validate();
 	});
 	$('#loginBtn').click(function(){
 		$('#welcomePage').toggle();
 		$('#loginPage').toggle();
-		$('#loginAlert').toggle();
+
 	});
 }
-
-loginValidation = () => {
-	let username = $('#username').val();
-	let password = $('#password').val();
-	if(!(username in users) || users[username].password !== password){
-		$('#loginAlert').toggle();
-		return false;
-	}
-	$('#welcomePage').hide();
-	$('#loginPage').toggle();
-	$('#mainGamePage').toggle();
-	return false;
-}
-
-closeBtns = () => {
-	let close = document.getElementsByClassName("closebtn");
-	let i;
-
-	for (i = 0; i < close.length; i++) {
-	close[i].onclick = function(){
-		var div = this.parentElement;
-		div.style.opacity = "0";
-		setTimeout(function(){ div.style.display = "none"; }, 600);
-	}
-	}
-}
-
 
 function Start() {
 	board = new Array();
