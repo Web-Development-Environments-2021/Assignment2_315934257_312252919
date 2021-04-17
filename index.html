@@ -2,6 +2,7 @@
 <html>
 	<head>
 		<script src="./jquery-3.4.1.slim.min.js"></script>
+		<script type="text/javascript" src="validate.js"></script>
 		<script type="text/javascript" src="./app.js"></script>
 		<link rel="stylesheet" href="app.css">
 	</head>
@@ -24,7 +25,16 @@
 			<h1>Register</h1>
 		</div>
 		<div id="loginPage">
-			<h1>Login</h1>
+			<form  onsubmit="return loginValidation();" id="loginForm" method="POST"> <!-- action route should be changed-->
+				<h2>Login</h2>
+				<input type="text" name="username" placeholder="Username" id="username"/>
+				<input type="password" name="password" placeholder="Password" id="password"/>
+				<input type="submit" value="Login">
+				<div class="alert" id="loginAlert">
+					<span class="closebtn">&times;</span>  
+					Wrong username/password, please enter valid details.
+				</div>
+			</form>
 		</div>
 		<div id="mainGamePage">
 			<div id="score">

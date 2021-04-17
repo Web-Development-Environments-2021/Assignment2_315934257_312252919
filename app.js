@@ -21,6 +21,11 @@ user :
 $(document).ready(function() {
 	context = canvas.getContext("2d");
 	Start();
+	user = {
+		username: "k",
+		password: "k"
+	}
+	users[user.username] = user;
 	initialize();
 });
 
@@ -28,6 +33,7 @@ initialize = () => {
 	$('#mainGamePage').hide();
 	$('#registerPage').hide();
 	$('#loginPage').hide();
+	closeBtns();
 	$('#registerBtn').click(function(){
 		$('#welcomePage').toggle();
 		$('#registerPage').toggle();
@@ -35,26 +41,35 @@ initialize = () => {
 	$('#loginBtn').click(function(){
 		$('#welcomePage').toggle();
 		$('#loginPage').toggle();
+		$('#loginAlert').toggle();
 	});
 }
 
+loginValidation = () => {
+	let username = $('#username').val();
+	let password = $('#password').val();
+	if(!(username in users) || users[username].password !== password){
+		$('#loginAlert').toggle();
+		return false;
+	}
+	$('#welcomePage').hide();
+	$('#loginPage').toggle();
+	$('#mainGamePage').toggle();
+	return false;
+}
 
+closeBtns = () => {
+	let close = document.getElementsByClassName("closebtn");
+	let i;
 
-// function myfunc(){
-// 	let x = document.getElementById("mainGamePage");
-// 	if(x.style.display === "collapse"){
-// 		x.style.display = "expand";
-// 	}
-// 	else{
-// 		x.style.display = "collapse";
-// 	}
-// 	// x.style.display = "block";
-
-// 	context = canvas.getContext("2d");
-// 	Start();
-// }
-
-
+	for (i = 0; i < close.length; i++) {
+	close[i].onclick = function(){
+		var div = this.parentElement;
+		div.style.opacity = "0";
+		setTimeout(function(){ div.style.display = "none"; }, 600);
+	}
+	}
+}
 
 
 function Start() {
