@@ -1,6 +1,6 @@
-loginValidation = () => {
-	let username = $('#username').val();
-	let password = $('#password').val();
+loginValidation = (username, password) => {
+	// let username = $('#username').val();
+	// let password = $('#password').val();
 	if(!(username in users) || users[username].password !== password){
 		$('#loginAlert').toggle();
 		return false;
@@ -8,7 +8,7 @@ loginValidation = () => {
 	$('#welcomePage').hide();
 	$('#loginPage').toggle();
 	$('#mainGamePage').toggle();
-	return false;
+	return true;
 }
 
 closeBtns = () => {
