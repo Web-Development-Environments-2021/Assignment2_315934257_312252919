@@ -16,7 +16,7 @@ var pac_life = 3;
 
 //monsters setting
 var move_monsters = 0;
-var n_monsters = 4;
+var n_monsters = 1;
 var mon_speed = 6;
 var monsters;
 
@@ -26,6 +26,11 @@ var food_arr;
 
 // player settings
 var current_logged_in;
+
+// fruit settings
+var fruit = new Object();
+fruit.img = "mango";
+var show_fruit;
 
 
 
@@ -95,12 +100,14 @@ function Start() {
 					['red', Math.round(0.3 * food_remain)],
 					['blue', Math.round(0.1 * food_remain)]
 				];
-	alert("dfgdf");
 	
 
 	var pacman_remain = 1;
-	var walls_remain = 4;
 	start_time = new Date();
+
+	fruit.x = 4;
+	fruit.y = 4;
+	show_fruit = true;
 
 	//createMonsters
 	buildMonsters();
@@ -163,7 +170,6 @@ function Start() {
 }
 
 function gotCaught(){
-	// alert("you got caught!!!!!!")
 	buildMonsters();
 	let emptyCell = findRandomEmptyCell(board);
 	board[pacman.x][pacman.y] = 0;
@@ -309,10 +315,17 @@ function Draw() {
 			}
 		}
 	}
+	//draw fruit
+	if(show_fruit){
+		let fruit_img = document.getElementById(fruit.img);
+		context.drawImage(fruit_img, fruit.x * 60, fruit.y * 60, 60, 60);
+	}
+
+
 	//draw monsters
 	for(let i=0; i<monsters.length; i++){
 		let m = monsters[i];
-		var img = document.getElementById(m.color);
+		let img = document.getElementById(m.color);
 		context.drawImage(img, m.x * 60, m.y * 60, 60, 60);
 	}
 }
@@ -367,7 +380,7 @@ function pacman_draw(center){
 function possibleMove(x, y){
 	try{
 		// board[x][y];
-		if(board[x][y] != 4){
+		if(board[x][y] != 4 && (x < 10 && x >= 0) && (y < 10 && y >= 0)){
 			for(let i=0; i<monsters.length; i++){
 				if(monsters[i].x == x && monsters[i].y == y){
 					return false;
@@ -385,8 +398,9 @@ function possibleMove(x, y){
 }
 
 function UpdatePosition() {
-	// monsters movement
 	if(move_monsters == 0){
+
+		// monsters movement
 		for(let i = 0; i < monsters.length; i++){
 			let m = monsters[i];
 			let dx = m.x - pacman.x;
@@ -420,6 +434,29 @@ function UpdatePosition() {
 				}
 			}
 		}
+
+		//fruit movement
+		if(show_fruit){
+			let am = {
+				0: [fruit.x - 1, fruit.y],
+				1: [fruit.x, fruit.y + 1],
+				2: [fruit.x + 1, fruit.y],
+				3: [fruit.x, fruit.y - 1]
+				};
+		
+			let pm = [];
+			for(let p in Object.keys(am)){
+				if(possibleMove(am[p][0], am[p][1])){
+					console.log(am[p]);
+					pm.push(am[p]);
+				}
+			}
+
+			let r = Math.floor(Math.random() * pm.length);
+
+			fruit.x = pm[r][0];
+			fruit.y = pm[r][1];
+		}
 	}
 	
 	move_monsters = (move_monsters+1) % mon_speed;
@@ -431,6 +468,7 @@ function UpdatePosition() {
 		if (pacman.y > 0 && board[pacman.x][pacman.y - 1] != 4) {
 			pacman.y--;
 		}
+
 	}
 	if (x == 2) {
 		if (pacman.y < 9 && board[pacman.x][pacman.y + 1] != 4) {
@@ -451,6 +489,12 @@ function UpdatePosition() {
 	//update score
 	if([5,15,25].includes(board[pacman.x][pacman.y])){
 		score+= board[pacman.x][pacman.y];
+	}
+	if(pacman.x == fruit.x && pacman.y == fruit.y){
+		show_fruit = false;
+		fruit.x = -1;
+		fruit.y = -1;
+		score += 50;
 	}
 	for(let i=0; i<monsters.length; i++){
 		if(monsters[i].x == pacman.x && monsters[i].y == pacman.y){
@@ -479,7 +523,7 @@ function main() {
 function isFinished(){
 	if (score == 500 || time_elapsed >= 3000 || pac_life == 0) {
 		window.clearInterval(interval);
-		window.alert("Game completed");
-		// console.log("Game completed");
+		// alert("Game completed");
+		console.log("Game completed");
 	}
 }
