@@ -70,7 +70,7 @@
     </div>
 
     <div id="loginPage">
-      <form onsubmit="return checkV();" id="loginForm" method="POST">
+      <form onsubmit="return logginHandle();" id="loginForm" method="POST">
         <!-- action route should be changed-->
         <h2>Login</h2>
         <input
@@ -94,6 +94,10 @@
     </div>
 
     <div id="mainGamePage">
+      <div id="namediv">
+        <label for="lblname">NAME:</label>
+        <input id="lblname" type="text" readonly />
+      </div>
       <div id="score">
         <label for="lblScore">SCORE:</label>
         <input id="lblScore" type="text" readonly />

@@ -20,6 +20,14 @@ var n_monsters = 4;
 var mon_speed = 6;
 var monsters;
 
+// game settings
+var food_remain = 90;
+var food_arr;
+
+// player settings
+var current_logged_in;
+
+
 
 /*
 user :
@@ -39,12 +47,13 @@ $(document).ready(function() {
 	// Start();
 });
 
-checkV = () => {
+logginHandle = () => {
 	let username = $('#username').val();
 	let password = $('#password').val();
 	let response = loginValidation(username, password);
 	if(response){
 		context = canvas.getContext("2d");
+		current_logged_in = username;
 		Start();
 	}
 	return false;
@@ -81,7 +90,14 @@ function Start() {
 	score = 0;
 	pac_color = "yellow";
 	var cnt = 100;
-	var food_remain = 50;
+	food_arr = [
+					['black', Math.round(0.6 * food_remain)],
+					['red', Math.round(0.3 * food_remain)],
+					['blue', Math.round(0.1 * food_remain)]
+				];
+	alert("dfgdf");
+	
+
 	var pacman_remain = 1;
 	var walls_remain = 4;
 	start_time = new Date();
@@ -205,16 +221,24 @@ function findRandomEmptyCell(board) {
 }
 
 function chooseFood(){
-	var r = Math.random();
-	if(r <= 0.6){
-		return 5;
+	let r = Math.floor(Math.random() * food_arr.length);
+	let kind = food_arr[r][0];
+	let kind_ball = 0;
+	if(kind == "black"){
+		kind_ball = 5;
 	}
-	else if(r <= 0.9){
-		return 15;
+	else if(kind == "red"){
+		kind_ball = 15;
 	}
 	else{
-		return 25;
+		kind_ball = 25;
 	}
+
+	food_arr[r][1]--;
+	if(food_arr[r][1] == 0){
+		food_arr.splice(r,1);
+	}
+	return kind_ball;
 }
 
 function GetKeyPressed() {
@@ -240,6 +264,7 @@ function Draw() {
 	canvas.width = canvas.width; //clean board
 	lblScore.value = score;
 	lblTime.value = time_elapsed;
+	lblname.value = current_logged_in;
 	life.value = pac_life;
 	for (var i = 0; i < 10; i++) {
 		for (var j = 0; j < 10; j++) {
