@@ -1,12 +1,27 @@
+
+@import 
+url(https://fonts.googleapis.com/css?family=Lato);
+
+
 body {
   /* background-image: url("photos/pacmanLogo.jpeg");
   background-repeat: no-repeat;
   background-size: cover; */
   padding: 0%;
   margin: 0%;
+  background-image: url("photos/cover.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-color: #cccccc;
+
 }
 
-ul {
+#canvas{
+  border: solid 1px black;
+}
+
+
+/* ul {
   list-style-type: none;
   margin: 0;
   padding: 0;
@@ -27,14 +42,69 @@ li a {
 }
 
 /* Change the link color to #111 (black) on hover */
-li a:hover {
+/* li a:hover {
   background-color: #111;
+}  */
+
+#menu{
+  float:left;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  background: #000000;
+  height: 100vh;
+}
+
+ul {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  list-style-type: none;
+  overflow: hidden;
+  margin: 0;
+  padding: 3px;
+}
+ul li {
+  float: left;
+  padding: 6px 0;
+}
+ul li a {
+  position: relative;
+  display: block;
+  padding: 4px 0;
+  font-family: Lato, sans-serif;
+  color: #ecf0f1;
+  text-decoration: none;
+  text-transform: uppercase;
+  /* text-align: center; */
+  transition: 0.5s;
+}
+ul li a::after {
+  position: absolute;
+  content: "";
+  top: 100%;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: #3498db;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.5s;
+}
+
+ul li a:hover {
+  color: #95a5a6;
+}
+
+ul li a:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
 }
 
 #welcomePage {
   width: 100%;
   height: 100vh;
-  background-image: url("photos/pacmanLogo.jpeg");
+  background-image: url("photos/cover.jpg");
   background-repeat: no-repeat;
   background-size: cover;
   background-color: #cccccc;
@@ -65,16 +135,45 @@ li a:hover {
   transition-duration: 0.4s;
 }
 
-/* temporary style to form */
+/* temporary style to form
 #registerPage {
   background-image: url("photos/pacmanLogo.jpeg");
   background-repeat: no-repeat;
   background-size: cover;
+} */
+
+.gameInformation{
+  margin: 5px 0;
+  float: left;
 }
 
-#registrationDiv {
+.gameInformation label {
+  padding-right: 10px;
+  text-align: right;
+  display: inline-block;
+}
+
+.gameInformation input:read-only{
+  background-color: #505C65;
+  color: white;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;  
+  border-radius: 5px;
+}
+
+.no-close .ui-dialog-titlebar-close {
+  display: none;
+}
+
+.registrationLogin {
   width: 500px;
   margin: 25px auto;
+}
+
+#mainGamePage{
+  background-color: #C6C6C6;
 }
 
 form {
