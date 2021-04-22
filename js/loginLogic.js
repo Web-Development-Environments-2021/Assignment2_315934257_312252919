@@ -7,7 +7,8 @@ loginValidation = (username, password) => {
 	}
 	$('#welcomePage').hide();
 	$('#loginPage').toggle();
-	$('#mainGamePage').toggle();
+	// $('#mainGamePage').toggle();
+	$('#settingsPage').toggle();
 	return true;
 }
 

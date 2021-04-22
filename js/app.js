@@ -12,16 +12,16 @@ var users = {};
 var pacman = new Object();
 var pac_color;
 var currentDirection;
-var pac_life = 3;
+var pac_life = 5;
 
 //monsters setting
 var move_monsters = 0;
-var n_monsters = 1;
+var n_monsters = 4;
 var mon_speed = 6;
 var monsters;
 
 // game settings
-var food_remain = 90;
+var food_remain = 50;
 var food_arr;
 
 // player settings
@@ -47,6 +47,7 @@ user :
 
 $(document).ready(function() {
 	initialize();
+	// $("#dialog").dialog();
 
 	// context = canvas.getContext("2d");
 	// Start();
@@ -57,12 +58,16 @@ logginHandle = () => {
 	let password = $('#password').val();
 	let response = loginValidation(username, password);
 	if(response){
-		context = canvas.getContext("2d");
+		
 		current_logged_in = username;
-		Start();
+		//TODO - check whether it should be here.
+		$('#registerBar').off('click');
+		$('#loginBar').off('click');
+		
 	}
 	return false;
 }
+
 
 initialize = () => {
 	user = {
@@ -74,10 +79,19 @@ initialize = () => {
 	$('#registerPage').hide();
 	$('#loginPage').hide();
 	$('#loginAlert').hide();
+	$('#settingsPage').hide();
 	closeBtns();
 	$('#registerBtn').click(function(){
 		$('#welcomePage').toggle();
 		$('#registerPage').toggle();
+		// part of validation
+		addRules();
+		validate();
+	});
+	$('#registerBar').click(function(){
+		$('#welcomePage').hide();
+		$('#loginPage').hide();
+		$('#registerPage').show();
 
 		// part of validation
 		addRules();
@@ -86,13 +100,29 @@ initialize = () => {
 	$('#loginBtn').click(function(){
 		$('#welcomePage').toggle();
 		$('#loginPage').toggle();
-
 	});
+	$('#loginBar').click(function(){
+		$('#welcomePage').hide();
+		$('#registerPage').hide();
+		$('#loginPage').show();
+	});
+	$('#newgameBtn').click(function(){
+		$('#mainGamePage').toggle();
+		$('#settingsPage').toggle();
+		context = canvas.getContext("2d");
+		Start();
+	})
+	$('#anotherGameBtn').click(function() {
+		$('#mainGamePage').toggle();
+		$('#settingsPage').toggle();
+	})
 }
 
 function Start() {
 	board = new Array();
 	score = 0;
+	pac_life = 5;
+	food_remain = 50;
 	pac_color = "yellow";
 	var cnt = 100;
 	food_arr = [
@@ -121,7 +151,10 @@ function Start() {
 				(i == 3 && j == 4) ||
 				(i == 3 && j == 5) ||
 				(i == 6 && j == 1) ||
-				(i == 6 && j == 2)
+				(i == 6 && j == 2) ||
+				(i == 5 && j == 7) ||
+				(i == 6 && j == 7) ||
+				(i == 7 && j == 7)
 			){
 				board[i][j] = 4;
 			}
@@ -175,6 +208,7 @@ function gotCaught(){
 	board[pacman.x][pacman.y] = 0;
 	pacman.x = emptyCell[0];
 	pacman.y = emptyCell[1];
+	console.log("Pacman position: [" + pacman.x + ", " + pacman.y + "]");
 	board[pacman.x][pacman.y] = 2;
 
 }
@@ -318,7 +352,7 @@ function Draw() {
 	//draw fruit
 	if(show_fruit){
 		let fruit_img = document.getElementById(fruit.img);
-		context.drawImage(fruit_img, fruit.x * 60, fruit.y * 60, 60, 60);
+		context.drawImage(fruit_img, fruit.y * 60, fruit.x * 60, 60, 60);
 	}
 
 
@@ -382,7 +416,7 @@ function possibleMove(x, y){
 		// board[x][y];
 		if(board[x][y] != 4 && (x < 10 && x >= 0) && (y < 10 && y >= 0)){
 			for(let i=0; i<monsters.length; i++){
-				if(monsters[i].x == x && monsters[i].y == y){
+				if(monsters[i].x == y && monsters[i].y == x){
 					return false;
 				}
 			}
@@ -438,24 +472,23 @@ function UpdatePosition() {
 		//fruit movement
 		if(show_fruit){
 			let am = {
-				0: [fruit.x - 1, fruit.y],
-				1: [fruit.x, fruit.y + 1],
-				2: [fruit.x + 1, fruit.y],
-				3: [fruit.x, fruit.y - 1]
+				0: [fruit.y, fruit.x - 1],
+				1: [fruit.y + 1, fruit.x],
+				2: [fruit.y, fruit.x + 1],
+				3: [fruit.y - 1, fruit.x]
 				};
 		
 			let pm = [];
 			for(let p in Object.keys(am)){
 				if(possibleMove(am[p][0], am[p][1])){
-					console.log(am[p]);
 					pm.push(am[p]);
 				}
 			}
 
 			let r = Math.floor(Math.random() * pm.length);
 
-			fruit.x = pm[r][0];
-			fruit.y = pm[r][1];
+			fruit.y = pm[r][0];
+			fruit.x = pm[r][1];
 		}
 	}
 	
@@ -490,7 +523,7 @@ function UpdatePosition() {
 	if([5,15,25].includes(board[pacman.x][pacman.y])){
 		score+= board[pacman.x][pacman.y];
 	}
-	if(pacman.x == fruit.x && pacman.y == fruit.y){
+	if(pacman.y == fruit.x && pacman.x == fruit.y){
 		show_fruit = false;
 		fruit.x = -1;
 		fruit.y = -1;
@@ -521,9 +554,40 @@ function main() {
 }
 
 function isFinished(){
-	if (score == 500 || time_elapsed >= 3000 || pac_life == 0) {
+	let msg = "";
+	let gameOver = false;
+	if(pac_life == 0){
 		window.clearInterval(interval);
-		// alert("Game completed");
+		msg = "Loser!";
+		gameOver = true;
+	}
+	else if (time_elapsed >= 10) {
+		window.clearInterval(interval);
+		gameOver = true;
+		if (score >= 100){
+			msg = "Winner!"
+		}
+		else{
+			msg = "You are better than " + score + " points!";
+		}
+	}
+	if( gameOver){
+		$('<div></div>').dialog({
+			modal: true,
+			title: "Game Over",
+			dialogClass: "no-close",
+			open: function() {
+				$(this).html(msg);
+				},
+				buttons: [
+				{
+				text: "OK",
+				click: function() {
+					$( this ).dialog( "close" );
+					}
+				}
+				]
+		});
 		console.log("Game completed");
 	}
 }

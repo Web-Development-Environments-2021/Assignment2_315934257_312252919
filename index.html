@@ -5,7 +5,7 @@
     <script type="text/javascript" src="./js/registValid.js"></script>
     <script type="text/javascript" src="./js/loginLogic.js"></script>
     <script type="text/javascript" src="./js/app.js"></script>
-
+    <title>Pacman</title>
     <link rel="stylesheet" href="app.css" />
 
     <!-- datepicker -->
@@ -28,9 +28,9 @@
   <body>
     <div id="menu">
       <ul>
-        <li><a href="#home">Pacman</a></li>
-        <li><a href="#news">Register</a></li>
-        <li><a href="#contact">Login</a></li>
+        <li><a href="#">Pacman</a></li>
+        <li><a id="registerBar">Register</a></li>
+        <li><a id="loginBar">Login</a></li>
         <li style="float: right"><a class="active" href="#about">About</a></li>
       </ul>
     </div>
@@ -41,7 +41,7 @@
     </div>
 
     <div id="registerPage">
-      <div id="registrationDiv">
+      <div class="registrationLogin">
         <form
           name="regForm"
           id="regForm"
@@ -49,6 +49,7 @@
           onsubmit="return registration()"
           method="GET"
         >
+        
           <label for="userNameIn">User name:</label><br />
           <input type="text" id="userNameIn" name="userNameIn" /><br />
 
@@ -70,75 +71,75 @@
     </div>
 
     <div id="loginPage">
-      <form onsubmit="return logginHandle();" id="loginForm" method="POST">
-        <!-- action route should be changed-->
-        <h2>Login</h2>
-        <input
-          type="text"
-          name="username"
-          placeholder="Username"
-          id="username"
-        />
-        <input
-          type="password"
-          name="password"
-          placeholder="Password"
-          id="password"
-        />
-        <input type="submit" value="Login" />
-        <div class="alert" id="loginAlert">
-          <span class="closebtn">&times;</span>
-          Wrong username/password, please enter valid details.
-        </div>
-      </form>
+      <div class="registrationLogin">
+        <form onsubmit="return logginHandle();" id="loginForm" method="POST">
+          <!-- action route should be changed-->
+          <h2>Login</h2>
+          <input
+            type="text"
+            name="username"
+            placeholder="Username"
+            id="username"
+          />
+          <input
+            type="password"
+            name="password"
+            placeholder="Password"
+            id="password"
+          />
+          <input type="submit" value="Login" />
+          <div class="alert" id="loginAlert">
+            <span class="closebtn">&times;</span>
+            Wrong username/password, please enter valid details.
+          </div>
+        </form>
+      </div>
     </div>
-
+    <div id="settingsPage">
+      <h1 style="color: red;">Settings</h1>
+      <button class="welcomeBtn" id="newgameBtn">New Game</button>
+    </div>
     <div id="mainGamePage">
-      <div id="namediv">
-        <label for="lblname">NAME:</label>
-        <input id="lblname" type="text" readonly />
-      </div>
-      <div id="score">
-        <label for="lblScore">SCORE:</label>
-        <input id="lblScore" type="text" readonly />
-      </div>
-      <div id="time">
-        <label for="lblTime">TIME:</label>
-        <input id="lblTime" type="text" readonly />
-      </div>
-      <div id="lifediv">
-        <label for="life">LIFE:</label>
-        <input id="life" type="text" readonly />
+      <div class="gameInformation">
+          <label for="lblname">NAME:</label>
+          <input id="lblname" type="text" readonly/>
+          <label for="lblScore">SCORE:</label>
+          <input id="lblScore" type="text" readonly/>
+          <label for="lblTime">TIME:</label>
+          <input id="lblTime" type="text" readonly/>
+          <label for="life">LIFE:</label>
+          <input id="life" type="text" readonly/>
+          <button id="anotherGameBtn">Another One</button>
       </div>
       <div id="game">
         <canvas id="canvas" height="600" width="600"></canvas>
         <img
-          src="./photos/red_monster.png"
+          src="./photos/red_monster_rm.png"
           alt="redMonster"
           id="rm"
           style="display: none"
         />
         <img
-          src="./photos/blue_monster.png"
+          src="./photos/blue_monster_rm.png"
           alt="redMonster"
           id="bm"
           style="display: none"
         />
         <img
-          src="./photos/green_monster.png"
+          src="./photos/green_monster_rm.png"
           alt="redMonster"
           id="gm"
           style="display: none"
         />
         <img
-          src="./photos/yellow_monster.png"
+          src="./photos/yellow_monster_rm.png"
           alt="redMonster"
           id="ym"
           style="display: none"
         />
 
         <img
-          src="./photos/mango.png"
+          src="./photos/mango_rm.png"
           alt="mango"
           id="mango"
           style="display: none"
