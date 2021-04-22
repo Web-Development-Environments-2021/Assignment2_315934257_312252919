@@ -1,6 +1,8 @@
 
 @import 
 url(https://fonts.googleapis.com/css?family=Lato);
+@import 
+url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
 
 
 body {
@@ -9,6 +11,7 @@ body {
   background-size: cover; */
   padding: 0%;
   margin: 0%;
+  font-family: Roboto, sans-serif;
   background-image: url("photos/cover.jpg");
   background-repeat: no-repeat;
   background-size: cover;
@@ -18,33 +21,13 @@ body {
 
 #canvas{
   border: solid 1px black;
+  max-height: 73.5vh;
+  width: 110vh;
 }
 
-
-/* ul {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
-  background-color: #333;
-}
-
-li {
-  float: left;
-}
-
-li a {
-  display: block;
+footer{
   color: white;
-  text-align: center;
-  padding: 14px 16px;
-  text-decoration: none;
 }
-
-/* Change the link color to #111 (black) on hover */
-/* li a:hover {
-  background-color: #111;
-}  */
 
 #menu{
   float:left;
@@ -52,7 +35,8 @@ li a {
   justify-content: center;
   text-align: center;
   background: #000000;
-  height: 100vh;
+  height: 101vh;
+  width: 12.3vh;
 }
 
 ul {
@@ -165,6 +149,10 @@ ul li a:hover::after {
 
 .no-close .ui-dialog-titlebar-close {
   display: none;
+}
+
+#paclogo{
+  float: right;
 }
 
 .registrationLogin {
