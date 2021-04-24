@@ -1,0 +1,30 @@
+#mainGamePage {
+  background-color: #c6c6c6;
+}
+
+.gameInformation {
+  margin: 5px 0;
+  float: left;
+}
+
+.gameInformation label {
+  padding-right: 10px;
+  text-align: right;
+  display: inline-block;
+}
+
+.gameInformation input:read-only {
+  background-color: #505c65;
+  color: white;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  border-radius: 5px;
+}
+
+#canvas {
+  border: solid 1px black;
+  max-height: 73.5vh;
+  width: 110vh;
+}

@@ -100,51 +100,37 @@ initialize = () => {
 		username: "k",
 		password: "k"
 	}
-	toggleAbout();
 	users[user.username] = user;
-	$('#mainGamePage').hide();
-	$('#registerPage').hide();
-	$('#loginPage').hide();
-	$('#loginAlert').hide();
-	$('#usernameAlert').hide();
-	$('#settingsPage').hide();
+	toggleAbout();
 	closeBtns();
+
+	// form validation
+	addRules();
+	validate();
+
 	$('#registerBtn').click(function(){
-		$('#welcomePage').toggle();
+		hideAllDivs();
 		$('#registerPage').toggle();
-		// part of validation
-		addRules();
-		validate();
 	});
 	$('#registerBar').click(function(){
-		// $('#welcomePage').hide();
-		// $('#loginPage').hide();
-		// $('#registerPage').show();
-		$('#welcomePage').toggle();
+		hideAllDivs();
 		$('#registerPage').toggle();
-
-		// part of validation
-		addRules();
-		validate();
 	});
 	$('#loginBtn').click(function(){
-		$('#welcomePage').toggle();
+		hideAllDivs();
 		$('#loginPage').toggle();
 	});
 	$('#loginBar').click(function(){
-		$('#welcomePage').hide();
-		$('#registerPage').hide();
-		$('#loginPage').show();
+		hideAllDivs();
+		$('#loginPage').toggle();
 	});
 	$('#newgameBtn').click(function(){
+		hideAllDivs();
 		$('#mainGamePage').toggle();
-		$('#settingsPage').toggle();
 		context = canvas.getContext("2d");
 		Start();
 	})
 	$('#anotherGameBtn').click(function() {
-		// $('#mainGamePage').toggle();
-		// $('#settingsPage').toggle();
 		clearInterval(interval);
 		context = canvas.getContext("2d");
 		Start();
@@ -152,21 +138,26 @@ initialize = () => {
 
 }
 
+function hideAllDivs(){
+	$('#welcomePage').hide();
+	$('#registerPage').hide();
+	$('#loginPage').hide();
+	$('#mainGamePage').hide();
+	$('#settingsPage').hide();
+}
+
 
 
 function Start() {
 	//general settings
 	score = 0;
-
 	pac_life = 1;
-	// pacman.x = 7;
-	// pacman.y = 3;
+	pacman.x = 7;
+	pacman.y = 3;
 	food_remain = $('#food-slider').slider("option", "value");
 	pac_color = "yellow";
 	var cnt = 100;
 	totalGameTime = parseInt(gameTime.value);
-	// console.log(totalGameTime);
-	// console.log(typeof(totalGameTime))
 
 	//monster settings
 	move_monsters = 0;
