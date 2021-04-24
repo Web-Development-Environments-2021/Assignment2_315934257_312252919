@@ -2,10 +2,9 @@ function toggleAbout(){
 // Get the modal
     var modal = document.getElementById("about-modal");
 
-    console.log(modal)
     // Get the button that opens the modal
     var btn = document.getElementById('aboutMenu');
-    console.log(btn)
+    
     // Get the <span> element that closes the modal
     var span = document.getElementsByClassName("close")[0];
 

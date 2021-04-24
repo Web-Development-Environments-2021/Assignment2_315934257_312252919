@@ -1,0 +1,16 @@
+#newgameBtn {
+  position: relative;
+}
+
+#randomSettings {
+  position: relative;
+}
+
+#food-custom-handle {
+  width: 3em;
+  height: 1.6em;
+  top: 50%;
+  margin-top: -0.8em;
+  text-align: center;
+  line-height: 1.6em;
+}
