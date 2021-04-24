@@ -7,6 +7,7 @@ var time_elapsed;
 var interval;
 var users = {};
 
+
 //pacman
 var pacman = new Object();
 var pac_color;
@@ -19,8 +20,13 @@ var n_monsters;
 var mon_speed;
 var monsters;
 
-// game
-var food_remain;
+
+// game settings
+var food_remain = 50;
+var food5Color = 'black';
+var food15Color = 'red';
+var food25Color = 'blue';
+
 var food_arr;
 
 // player settings
@@ -140,13 +146,17 @@ initialize = () => {
 		// context = canvas.getContext("2d");
 		// Start();
 	})
+
 }
+
+
 
 function Start() {
 	//general settings
 	score = 0;
-	pac_life = 5;
-	food_remain = 50;
+
+	pac_life = 1;
+	food_remain = $('#slider').slider("option", "value");
 	pac_color = "yellow";
 	var cnt = 100;
 
@@ -337,19 +347,19 @@ function chooseFood(){
 }
 
 function GetKeyPressed() {
-	if (keysDown[38]) {
+	if (keysDown[upArrow]) {
 		currentDirection = 1;
 		return 1;
 	}
-	if (keysDown[40]) {
+	if (keysDown[downArrow]) {
 		currentDirection = 2;
 		return 2;
 	}
-	if (keysDown[37]) {
+	if (keysDown[leftArrow]) {
 		currentDirection = 3;
 		return 3;
 	}
-	if (keysDown[39]) {
+	if (keysDown[rightArrow]) {
 		currentDirection = 4;
 		return 4;
 	}
@@ -361,6 +371,9 @@ function Draw() {
 	lblTime.value = time_elapsed;
 	lblname.value = current_logged_in;
 	life.value = pac_life;
+	food5Color = $('#color-picker1').spectrum('get');
+	food15Color = $('#color-picker2').spectrum('get');
+	food25Color = $('#color-picker3').spectrum('get');
 	for (var i = 0; i < 10; i++) {
 		for (var j = 0; j < 10; j++) {
 			var center = new Object();
@@ -373,7 +386,7 @@ function Draw() {
 			else if (board[i][j] == 5) {
 				context.beginPath();
 				context.arc(center.x, center.y, 10, 0, 2 * Math.PI); // circle
-				context.fillStyle = "black"; //color
+				context.fillStyle = food5Color; //color
 				context.fill();
 				context.fillStyle = "white";
 				context.textAlign = "center";
@@ -382,7 +395,7 @@ function Draw() {
 			else if (board[i][j] == 15) {
 				context.beginPath();
 				context.arc(center.x, center.y, 15, 0, 2 * Math.PI); // circle
-				context.fillStyle = "red"; //color
+				context.fillStyle = food15Color; //color
 				context.fill();
 				context.fillStyle = "white";
 				context.textAlign = "center";
@@ -391,7 +404,7 @@ function Draw() {
 			else if (board[i][j] == 25) {
 				context.beginPath();
 				context.arc(center.x, center.y, 20, 0, 2 * Math.PI); // circle
-				context.fillStyle = "blue"; //color
+				context.fillStyle = food25Color; //color
 				context.fill();
 				context.fillStyle = "white";
 				context.textAlign = "center";

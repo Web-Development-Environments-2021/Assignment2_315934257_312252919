@@ -4,6 +4,7 @@
     <script src="./js/jquery-3.4.1.slim.min.js"></script>
     <script type="text/javascript" src="./js/registValid.js"></script>
     <script type="text/javascript" src="./js/loginLogic.js"></script>
+    <script src="js/settings.js"></script>
     <script type="text/javascript" src="./js/app.js"></script>
     <title>Pacman</title>
     <link rel="stylesheet" href="app.css" />
@@ -13,13 +14,13 @@
       rel="stylesheet"
       href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"
     />
+    <link rel="stylesheet" href="/resources/demos/style.css">
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-    <script>
-      $(function () {
-        $("#datepicker").datepicker();
-      });
-    </script>
+    <script src="https://cdn.jsdelivr.net/npm/spectrum-colorpicker2/dist/spectrum.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/spectrum-colorpicker2/dist/spectrum.min.css" />
+
+
 
     <!-- validation form -->
     <script src="./js/jquery-validation-1.19.1/dist/jquery.validate.min.js"></script>
@@ -100,6 +101,54 @@
 
     <div id="settingsPage">
       <h1 style="color: red">Settings</h1>
+      <div id="accordion">
+        <h3>Game Settings</h3>
+        <div>
+          <p>Food Colors</p>
+          <ul>
+            <li>5 points <input id="color-picker1" value='#276cb8'/></li>
+            <li>15 points <input id="color-picker2" value='#276cb8' /></li>
+            <li>25 points <input id="color-picker3" value='#276cb8' /></li>
+          </ul>
+          <p>Game Time</p>
+          <p>Food Amount</p>
+          <div id="slider">
+            <div id="custom-handle" class="ui-slider-handle"></div>
+          </div>
+        </div>
+        <h3>Monster Settings</h3>
+        <div>
+          <p>
+          Amount
+          </p>
+          <p>Speed</p>
+        </div>
+        <h3>Keyboard Settings</h3>
+        <div id='keySettings'>
+          <label for="rightMoveInput">&#8594;</label>
+          <input id="rightMoveInput" type="text" onkeydown="rightMove(event)" maxlength="1" value="ArrowRight"/>
+          <label for="downMoveInput">&#8595;</label>
+          <input id="downMoveInput" type="text" onkeydown="downMove(event)" maxlength="1" value="ArrowDown"/>
+          <label for="leftMoveInput">&#8592;</label>
+          <input id="leftMoveInput" type="text" onkeydown="leftMove(event)" maxlength="1" value = "ArrowLeft"/>
+          <label for="upMoveInput">&#8593;</label>
+          <input id="upMoveInput" type="text" onkeydown="upMove(event)" maxlength="1" value="ArrowUp"/>
+        </div>
+        <h3>Section 4</h3>
+        <div>
+          <p>
+          Cras dictum. Pellentesque habitant morbi tristique senectus et netus
+          et malesuada fames ac turpis egestas. Vestibulum ante ipsum primis in
+          faucibus orci luctus et ultrices posuere cubilia Curae; Aenean lacinia
+          mauris vel est.
+          </p>
+          <p>
+          Suspendisse eu nisl. Nullam ut libero. Integer dignissim consequat lectus.
+          Class aptent taciti sociosqu ad litora torquent per conubia nostra, per
+          inceptos himenaeos.
+          </p>
+        </div>
+      </div>
       <button class="welcomeBtn" id="newgameBtn">New Game</button>
     </div>
 
