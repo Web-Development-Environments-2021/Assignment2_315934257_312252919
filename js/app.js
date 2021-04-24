@@ -1,5 +1,4 @@
 var context;
-
 var board;
 var score;
 
@@ -8,31 +7,51 @@ var time_elapsed;
 var interval;
 var users = {};
 
-//pacman settings
+//pacman
 var pacman = new Object();
 var pac_color;
 var currentDirection;
-var pac_life = 5;
+var pac_life;
 
-//monsters setting
-var move_monsters = 0;
-var n_monsters = 4;
-var mon_speed = 6;
+//monsters
+var move_monsters;
+var n_monsters;
+var mon_speed;
 var monsters;
 
-// game settings
-var food_remain = 50;
+// game
+var food_remain;
 var food_arr;
 
 // player settings
 var current_logged_in;
 
-// fruit settings
-var fruit = new Object();
-fruit.img = "mango";
-var show_fruit;
+// mango
+var mango = new Object();
+mango.x;
+mango.y;
+mango.img = "mango";
+mango.show;
 
+// apple
+var apple = new Object();
+apple.x;
+apple.y;
+apple.time_amount;
+apple.duration;
+apple.is_eaten;
 
+// clock settings
+var clock = new Object();
+clock.x;
+clock.y;
+clock.is_eaten;
+clock.clock_timer;
+clock.start_show;
+clock.end_show;
+clock.interval;
+clock.time_add;
+clock.added_time;
 
 /*
 user :
@@ -89,9 +108,11 @@ initialize = () => {
 		validate();
 	});
 	$('#registerBar').click(function(){
-		$('#welcomePage').hide();
-		$('#loginPage').hide();
-		$('#registerPage').show();
+		// $('#welcomePage').hide();
+		// $('#loginPage').hide();
+		// $('#registerPage').show();
+		$('#welcomePage').toggle();
+		$('#registerPage').toggle();
 
 		// part of validation
 		addRules();
@@ -115,16 +136,48 @@ initialize = () => {
 	$('#anotherGameBtn').click(function() {
 		$('#mainGamePage').toggle();
 		$('#settingsPage').toggle();
+		clearInterval(interval);
+		// context = canvas.getContext("2d");
+		// Start();
 	})
 }
 
 function Start() {
-	board = new Array();
+	//general settings
 	score = 0;
-	pac_life = 1;
+	pac_life = 5;
 	food_remain = 50;
 	pac_color = "yellow";
 	var cnt = 100;
+
+	//monster settings
+	move_monsters = 0;
+	n_monsters = 1;
+	mon_speed = 6;
+
+	//mango settings
+	mango.x = 4;
+	mango.y = 4;
+	mango.show = true;
+
+	//apple settings
+	apple.x = 2;
+	apple.y = 9;
+	apple.time_amount = 20;
+	apple.duration = 8;
+	apple.is_eaten = false;
+
+	// clock settings
+	clock.x = 2;
+	clock.y = 2;
+	clock.is_eaten = false;
+	clock.clock_timer = 0;
+	clock.start_show = 10;
+	clock.end_show = 40;
+	clock.interval = 100;
+	clock.time_add = 5;
+	clock.added_time = 0;
+
 	food_arr = [
 					['black', Math.round(0.6 * food_remain)],
 					['red', Math.round(0.3 * food_remain)],
@@ -135,13 +188,10 @@ function Start() {
 	var pacman_remain = 1;
 	start_time = new Date();
 
-	fruit.x = 4;
-	fruit.y = 4;
-	show_fruit = true;
-
 	//createMonsters
 	buildMonsters();
 
+	board = new Array();
 	for (var i = 0; i < 10; i++) {
 		board[i] = new Array();
 		//put obstacles in (i=3,j=3) and (i=3,j=4) and (i=3,j=5), (i=6,j=1) and (i=6,j=2)
@@ -180,7 +230,7 @@ function Start() {
 	}
 
 	while (food_remain > 0) {
-		var emptyCell = findRandomEmptyCell(board);
+		let emptyCell = findRandomEmptyCell(board);
 		board[emptyCell[0]][emptyCell[1]] = chooseFood();
 		food_remain--;
 	}
@@ -199,7 +249,7 @@ function Start() {
 		},
 		false
 	);
-	interval = setInterval(main, 70);
+	interval = setInterval(main, 100);
 }
 
 function gotCaught(){
@@ -355,12 +405,17 @@ function Draw() {
 			}
 		}
 	}
-	//draw fruit
-	if(show_fruit){
-		let fruit_img = document.getElementById(fruit.img);
-		context.drawImage(fruit_img, fruit.y * 60, fruit.x * 60, 60, 60);
+	//draw mango
+	if(mango.show){
+		let mango_img = document.getElementById(mango.img);
+		context.drawImage(mango_img, mango.y * 60, mango.x * 60, 60, 60);
 	}
 
+	//draw apple
+	if(!apple.is_eaten){
+		let a = document.getElementById("apple");
+		context.drawImage(a, apple.y * 60, apple.x * 60, 60, 60);
+	}
 
 	//draw monsters
 	for(let i=0; i<monsters.length; i++){
@@ -368,6 +423,14 @@ function Draw() {
 		let img = document.getElementById(m.color);
 		context.drawImage(img, m.y * 60, m.x * 60, 60, 60);
 	}
+
+	//draw clock
+	if(!clock.is_eaten && clock.clock_timer > clock.start_show && clock.clock_timer < clock.end_show){
+		let c = document.getElementById("clock");
+		context.drawImage(c, clock.y * 60, clock.x * 60, 60, 60);
+	}
+	
+	
 }
 
 function pacman_draw(center){
@@ -419,7 +482,6 @@ function pacman_draw(center){
 
 function possibleMove(x, y){
 	try{
-		// board[x][y];
 		if(board[x][y] != 4 && (x < 10 && x >= 0) && (y < 10 && y >= 0)){
 			for(let i=0; i<monsters.length; i++){
 				if(monsters[i].x == x && monsters[i].y == y){
@@ -435,6 +497,34 @@ function possibleMove(x, y){
 	catch{
 		return false;
 	}
+}
+
+function findRandomPossibleMove(x, y, remove){
+	//remove: 0/2/null - 0 to remove up and down movements from moves,
+	//					 2 to remove left and right.
+	//					 null to not remove any movements.
+
+	let allMoves = {
+		0: [x - 1, y],  //up
+		1: [x + 1, y],	//down
+		2: [x, y + 1],  //right
+		3: [x, y - 1]	//left
+		};
+
+	if(remove != null){
+		delete allMoves[remove];
+		delete allMoves[remove + 1];
+	}
+
+	let possibleMoves = [];
+	for(const p in allMoves){
+		if(possibleMove(allMoves[p][0], allMoves[p][1])){
+			possibleMoves.push(allMoves[p]);
+		}
+	}
+
+	let r = Math.floor(Math.random() * possibleMoves.length);
+	return possibleMoves[r]
 }
 
 function UpdatePosition() {
@@ -454,10 +544,20 @@ function UpdatePosition() {
 					if(possibleMove(m.x-1, m.y)){
 						m.x--;
 					}
+					else{
+						let move = findRandomPossibleMove(m.x, m.y, 0);
+						m.x = move[0];
+						m.y = move[1];
+					}
 				}
 				else{ //down
 					if(possibleMove(m.x+1, m.y)){
 						m.x++;
+					}
+					else{
+						let move = findRandomPossibleMove(m.x, m.y, 0);
+						m.x = move[0];
+						m.y = move[1];
 					}
 				}
 			}
@@ -466,39 +566,55 @@ function UpdatePosition() {
 					if(possibleMove(m.x, m.y-1)){
 						m.y--;
 					}
+					else{
+						let move = findRandomPossibleMove(m.x, m.y, 2);
+						m.x = move[0];
+						m.y = move[1];
+					}
 				}
 				else{ //right
 					if(possibleMove(m.x, m.y+1)){
 						m.y++;
 					}
+					else{
+						let move = findRandomPossibleMove(m.x, m.y, 2);
+						m.x = move[0];
+						m.y = move[1];
+					}
 				}
 			}
 		}
 
-		//fruit movement
-		if(show_fruit){
-			let am = {
-				0: [fruit.x-1, fruit.y],
-				1: [fruit.x, fruit.y + 1],
-				2: [fruit.x + 1, fruit.y],
-				3: [fruit.x, fruit.y - 1]
-				};
-		
-			let pm = [];
-			for(let p in Object.keys(am)){
-				if(possibleMove(am[p][0], am[p][1])){
-					pm.push(am[p]);
-				}
-			}
+		// mango movement
+		if(mango.show){
+			let move = findRandomPossibleMove(mango.x, mango.y, null);
+			mango.x = move[0];
+			mango.y = move[1];
+		}
 
-			let r = Math.floor(Math.random() * pm.length);
+		// clock movement
+		let move = findRandomPossibleMove(clock.x, clock.y, null);
+		clock.x = move[0];
+		clock.y = move[1];
+	}
+	move_monsters = (move_monsters+1) % mon_speed;
 
-			fruit.x = pm[r][0];
-			fruit.y = pm[r][1];
+	console.log(mon_speed)
+	if(apple.is_eaten){
+		apple.time_amount--;
+		if(apple.time_amount == 0){
+			mon_speed -= apple.duration;
 		}
 	}
-	
-	move_monsters = (move_monsters+1) % mon_speed;
+
+	// restart clock
+	clock.clock_timer = (clock.clock_timer+1) % clock.interval;
+	if(clock.clock_timer == 0){
+		clock.is_eaten = false;
+		let emptyCell = findRandomEmptyCell(board);
+		clock.x = emptyCell[0];
+		clock.y = emptyCell[1];
+	}
 
 	// pacman movement
 	var x = GetKeyPressed();
@@ -529,11 +645,21 @@ function UpdatePosition() {
 	if([5,15,25].includes(board[pacman.x][pacman.y])){
 		score+= board[pacman.x][pacman.y];
 	}
-	if(pacman.x == fruit.x && pacman.y == fruit.y){
-		show_fruit = false;
-		fruit.x = -1;
-		fruit.y = -1;
+	if(pacman.x == mango.x && pacman.y == mango.y){
+		mango.show = false;
+		mango.x = -1;
+		mango.y = -1;
 		score += 50;
+	}
+	// slows down monsters and mango
+	if(pacman.x == apple.x && pacman.y == apple.y && !apple.is_eaten){
+		apple.is_eaten = true;
+		mon_speed += apple.duration;
+	}
+
+	if(pacman.x == clock.x && pacman.y == clock.y && !clock.is_eaten){
+		clock.is_eaten = true;
+		clock.added_time += clock.time_add;
 	}
 	for(let i=0; i<monsters.length; i++){
 		if(monsters[i].x == pacman.x && monsters[i].y == pacman.y){
@@ -542,12 +668,13 @@ function UpdatePosition() {
 	}
 	board[pacman.x][pacman.y] = 2;
 
-	// 
-	var currentTime = new Date();
+	// update time
+	var currentTime = new Date() - (clock.added_time * 1000);
 	time_elapsed = (currentTime - start_time) / 1000;
-	if (score >= 20 && time_elapsed <= 10) {
-		pac_color = "green";
-	}
+
+	// if (score >= 20 && time_elapsed <= 10) {
+	// 	pac_color = "green";
+	// }
 }
 
 function main() {
@@ -564,7 +691,7 @@ function isFinished(){
 		msg = "Loser!";
 		gameOver = true;
 	}
-	else if (time_elapsed >= 100) {
+	else if (time_elapsed >= 60) {
 		window.clearInterval(interval);
 		gameOver = true;
 		if (score >= 100){
@@ -591,11 +718,5 @@ function isFinished(){
 				}
 				]
 		});
-		console.log("Pacman position: [" + pacman.x + ", " + pacman.y + "]");
-		console.log("fruit position: [" + fruit.x + ", " + fruit.y + "]");
-		for(let i=0;i<monsters.length; i++){
-			console.log("monster" + i + "position: [" + monsters[i].x + ", " + monsters[i].y + "]");
-		}
-		console.log("Game completed");
 	}
 }
