@@ -26,6 +26,7 @@ var food_remain = 50;
 var food5Color = 'black';
 var food15Color = 'red';
 var food25Color = 'blue';
+var totalGameTime;
 
 var food_arr;
 
@@ -99,11 +100,13 @@ initialize = () => {
 		username: "k",
 		password: "k"
 	}
+	toggleAbout();
 	users[user.username] = user;
 	$('#mainGamePage').hide();
 	$('#registerPage').hide();
 	$('#loginPage').hide();
 	$('#loginAlert').hide();
+	$('#usernameAlert').hide();
 	$('#settingsPage').hide();
 	closeBtns();
 	$('#registerBtn').click(function(){
@@ -140,11 +143,11 @@ initialize = () => {
 		Start();
 	})
 	$('#anotherGameBtn').click(function() {
-		$('#mainGamePage').toggle();
-		$('#settingsPage').toggle();
+		// $('#mainGamePage').toggle();
+		// $('#settingsPage').toggle();
 		clearInterval(interval);
-		// context = canvas.getContext("2d");
-		// Start();
+		context = canvas.getContext("2d");
+		Start();
 	})
 
 }
@@ -156,14 +159,21 @@ function Start() {
 	score = 0;
 
 	pac_life = 1;
-	food_remain = $('#slider').slider("option", "value");
+	// pacman.x = 7;
+	// pacman.y = 3;
+	food_remain = $('#food-slider').slider("option", "value");
 	pac_color = "yellow";
 	var cnt = 100;
+	totalGameTime = parseInt(gameTime.value);
+	// console.log(totalGameTime);
+	// console.log(typeof(totalGameTime))
 
 	//monster settings
 	move_monsters = 0;
-	n_monsters = 1;
-	mon_speed = 6;
+	n_monsters = $('#monster-slider').slider("option", "value");
+	mon_speed = parseInt(speed.value);
+	// mon_speed = 6;
+	console.log("Monster Speed:" + mon_speed);
 
 	//mango settings
 	mango.x = 4;
@@ -200,7 +210,6 @@ function Start() {
 
 	//createMonsters
 	buildMonsters();
-
 	board = new Array();
 	for (var i = 0; i < 10; i++) {
 		board[i] = new Array();
@@ -230,6 +239,7 @@ function Start() {
 					pacman.y = j;
 					pacman_remain--;
 					board[i][j] = 2;
+					
 				}
 				else {
 					board[i][j] = 0;
@@ -612,7 +622,7 @@ function UpdatePosition() {
 	}
 	move_monsters = (move_monsters+1) % mon_speed;
 
-	console.log(mon_speed)
+	// console.log(mon_speed)
 	if(apple.is_eaten){
 		apple.time_amount--;
 		if(apple.time_amount == 0){
@@ -704,7 +714,7 @@ function isFinished(){
 		msg = "Loser!";
 		gameOver = true;
 	}
-	else if (time_elapsed >= 60) {
+	else if (time_elapsed >= totalGameTime) {
 		window.clearInterval(interval);
 		gameOver = true;
 		if (score >= 100){

@@ -4,7 +4,8 @@
     <script src="./js/jquery-3.4.1.slim.min.js"></script>
     <script type="text/javascript" src="./js/registValid.js"></script>
     <script type="text/javascript" src="./js/loginLogic.js"></script>
-    <script src="js/settings.js"></script>
+    <script type="text/javascript" src="js/settings.js"></script>
+    <script type="text/javascript" src="/js/about.js"></script>
     <script type="text/javascript" src="./js/app.js"></script>
     <title>Pacman</title>
     <link rel="stylesheet" href="app.css" />
@@ -35,7 +36,7 @@
         <li><a href="#">Pacman</a></li>
         <li><a id="registerBar">Register</a></li>
         <li><a id="loginBar">Login</a></li>
-        <li><a class="active" href="#about">About</a></li>
+        <li><a class="active" id="aboutMenu">About</a></li>
       </ul>
     </div>
 
@@ -55,7 +56,10 @@
         >
           <label for="userNameIn">User name:</label><br />
           <input type="text" id="userNameIn" name="userNameIn" /><br />
-
+          <div class="alert" id="usernameAlert">
+            <span class="closebtn">&times;</span>
+            Username already exists.
+          </div>
           <label for="passwordIn">Password:</label><br />
           <input type="password" id="passwordIn" name="passwordIn" /><br />
 
@@ -106,14 +110,15 @@
         <div>
           <p>Food Colors</p>
           <ul>
-            <li>5 points <input id="color-picker1" value='#276cb8'/></li>
-            <li>15 points <input id="color-picker2" value='#276cb8' /></li>
-            <li>25 points <input id="color-picker3" value='#276cb8' /></li>
+            <li>5 points <input id="color-picker1" type="color" value='#000000'/></li>
+            <li>15 points <input id="color-picker2" type="color" value='#0000FF' /></li>
+            <li>25 points <input id="color-picker3" type="color" value='#FF0000' /></li>
           </ul>
-          <p>Game Time</p>
+          <p>Game Time(Seconds)</p>
+          <input type="number" id="gameTime" name="quantity" min="60" value="60" onchange="gameTimeValidation()" />
           <p>Food Amount</p>
-          <div id="slider">
-            <div id="custom-handle" class="ui-slider-handle"></div>
+          <div id="food-slider">
+            <div id="food-custom-handle" class="ui-slider-handle"></div>
           </div>
         </div>
         <h3>Monster Settings</h3>
@@ -121,7 +126,15 @@
           <p>
           Amount
           </p>
+          <div id="monster-slider">
+            <div id="monster-custom-handle" class="ui-slider-handle"></div>
+          </div>
           <p>Speed</p>
+          <select name="speed" id="speed">
+            <option value="8">Slow</option>
+            <option value="6">Medium</option>
+            <option value="4">Fast</option>
+          </select>
         </div>
         <h3>Keyboard Settings</h3>
         <div id='keySettings'>
@@ -134,22 +147,9 @@
           <label for="upMoveInput">&#8593;</label>
           <input id="upMoveInput" type="text" onkeydown="upMove(event)" maxlength="1" value="ArrowUp"/>
         </div>
-        <h3>Section 4</h3>
-        <div>
-          <p>
-          Cras dictum. Pellentesque habitant morbi tristique senectus et netus
-          et malesuada fames ac turpis egestas. Vestibulum ante ipsum primis in
-          faucibus orci luctus et ultrices posuere cubilia Curae; Aenean lacinia
-          mauris vel est.
-          </p>
-          <p>
-          Suspendisse eu nisl. Nullam ut libero. Integer dignissim consequat lectus.
-          Class aptent taciti sociosqu ad litora torquent per conubia nostra, per
-          inceptos himenaeos.
-          </p>
-        </div>
       </div>
       <button class="welcomeBtn" id="newgameBtn">New Game</button>
+      <button class="welcomeBtn" id="randomSettings" onclick="randomizeSettings()">Randomize Settings</button>
     </div>
 
     <div id="mainGamePage">
@@ -213,6 +213,21 @@
         />
       </div>
     </div>
+
+      <div id="about-modal" class="modal">
+
+        <!-- Modal content -->
+        <div class="modal-content">
+          <span class="close">&times;</span>
+          <h3>Jonatan Milver, Guy Zaidman</h3>
+          <p>We used JQuery plugins in several places during this assignment:</p>
+          <ul>
+            <li>During implementing the validation of the registration form.</li>
+            <li>We used several JQuery user interfaces such as datepicker, slider, accordion and spectrum for colors</li>
+          </ul>
+        </div>
+      
+      </div>
 
     <footer>
       <p>

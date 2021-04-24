@@ -16,6 +16,10 @@ addRules = () => {
 registration = () => {
 	if($('#regForm').valid()){
 		let username = $('#userNameIn').val();
+		if(username in users){
+			$('#usernameAlert').toggle();
+			return false;
+		}
 		let password = $('#passwordIn').val();
 		let fName = $('#fullName').val();
 		let email = $('#emailIn').val();
@@ -32,7 +36,9 @@ registration = () => {
 		users[user.username] = user;
 
 		$('#registerPage').toggle();
-		$('#loginPage').toggle();
+		$('#welcomePage').toggle();
+
+		document.getElementById('regForm').reset();
 	}
 	return false;
 }
