@@ -9,6 +9,7 @@ loginValidation = (username, password) => {
 	$('#loginPage').toggle();
 	// $('#mainGamePage').toggle();
 	$('#settingsPage').toggle();
+	document.getElementById('loginForm').reset();
 	return true;
 }
 

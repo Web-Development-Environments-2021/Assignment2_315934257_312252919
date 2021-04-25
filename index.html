@@ -19,6 +19,7 @@
       rel="stylesheet"
       href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"
     />
+    <script src="https://kit.fontawesome.com/52a021a671.js" crossorigin="anonymous"></script>
     <!-- <link rel="stylesheet" href="/resources/demos/style.css" /> -->
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
@@ -29,6 +30,9 @@
       href="https://cdn.jsdelivr.net/npm/spectrum-colorpicker2/dist/spectrum.min.css"
     />
 
+    <script src="https://platform.linkedin.com/badges/js/profile.js" async defer type="text/javascript"></script>
+
+
     <!-- validation form -->
     <script src="./js/jquery-validation-1.19.1/dist/jquery.validate.min.js"></script>
   </head>
@@ -38,10 +42,10 @@
       <img id="paclogo" src="photos/pac_logo.png" />
       <div id="menu">
         <ul>
-          <li><a href="#">Pacman</a></li>
-          <li><a id="registerBar">Register</a></li>
-          <li><a id="loginBar">Login</a></li>
-          <li><a class="active" id="aboutMenu">About</a></li>
+          <li><a href="#" id="pacmanBar">Pacman</a></li>
+          <li><a href="#" id="registerBar">Register</a></li>
+          <li><a href="#" id="loginBar">Login</a></li>
+          <li><a href="#" class="active" id="aboutMenu">About</a></li>
         </ul>
       </div>
     </header>
@@ -312,11 +316,15 @@
     </div>
 
     <footer>
-      <p>
-        Authors: Jonatan Milver
-        <a href="mailto:milver@post.bgu.ac.il">milver@post.bgu.ac.il</a>
-        Guy Zaidman
-        <a href="mailto:guyzaid@post.bgu.ac.il">guyzaid@post.bgu.ac.il</a>
+      <p> 
+        <div class="footerName">
+          &copy; Authors: Jonatan Milver
+          <i class="fab fa-linkedin"></i><a href="https://www.linkedin.com/in/jonatan-milver-518443186/"></i> Jonatan Milver</a>
+        </div>
+        <div class="footerName">
+          Guy Zaidman
+          <i class="fab fa-linkedin"></i><a href="https://www.linkedin.com/in/guy-zaidman-51bb43154/"></i> Guy Zaidman</a>
+        </div>
       </p>
     </footer>
   </body>
