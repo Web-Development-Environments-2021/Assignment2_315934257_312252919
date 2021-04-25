@@ -1,5 +1,6 @@
 #mainGamePage {
   background-color: #c6c6c6;
+  height: 100%;
 }
 
 .gameInformation {
@@ -33,14 +34,17 @@
 
 #canvas {
   border: solid 1px black;
-  max-height: 73.5vh;
-  width: 110vh;
+  max-height: 60vh;
+  /* height: fit-content; */
+  width: 60%;
   /* display:inline-block; */
   float: left;
   
 }
 
 #settingsView {
+  width: 30%;
   float:left;
+  position: relative;
   /* display:inline-block; */
 }
