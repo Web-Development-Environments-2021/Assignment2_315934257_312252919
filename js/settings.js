@@ -67,24 +67,32 @@ $(function() {
 
 
 function rightMove(e){
-    rightArrow = e.which;
-    rightMoveInput.value = e.key;
-    console.log(rightArrow);
+    if(downArrow != e.which && upArrow != e.which && leftArrow != e.which){
+        rightArrow = e.which;
+        rightMoveInput.value = e.key;
+    }
+
 }
 
 function downMove(e){
-    downArrow = e.which;
-    downMoveInput.value = e.key;
+    if(rightArrow != e.which && upArrow != e.which && leftArrow != e.which){
+        downArrow = e.which;
+        downMoveInput.value = e.key;
+    }
 }
 
 function leftMove(e){
-    leftArrow = e.which;
-    leftMoveInput.value = e.key;
+    if(downArrow != e.which && upArrow != e.which && rightArrow != e.which){
+        leftArrow = e.which;
+        leftMoveInput.value = e.key;
+    }
 }
 
 function upMove(e){
-    upArrow = e.which;
-    upMoveInput.value = e.key;
+    if(downArrow != e.which && rightArrow != e.which && leftArrow != e.which){
+        upArrow = e.which;
+        upMoveInput.value = e.key;
+    }
 }
 
 function randomizeSettings(){
@@ -96,7 +104,6 @@ function randomizeSettings(){
     let speedOptions = ['8', '6', '4']; // 8 - Slow, 6 - Medium, 4 - High
     let randomSpeed = Math.floor(Math.random() * 3);
     speed.value = speedOptions[randomSpeed];
-    console.log(speed.value);
     //food colors
     let randomColor = Math.floor(Math.random()*16777215).toString(16);
     $('#color-picker1').spectrum('set', randomColor);
@@ -111,6 +118,14 @@ function randomizeSettings(){
     let randomFoodAmt = Math.floor(Math.random()*40) + 50;
     $('#food-slider').slider("option", "value", randomFoodAmt);
     $('#food-custom-handle').text(randomFoodAmt);
+    rightArrow = 39;
+    rightMoveInput.value = 'ArrowRight';
+    downArrow = 40;
+    downMoveInput.value = 'ArrowDown';
+    leftArrow = 37;
+    leftMoveInput.value = 'ArrowLeft';
+    upArrow = 38;
+    upMoveInput.value = 'ArrowUp';
 }
 
 function gameTimeValidation(){
@@ -121,4 +136,16 @@ function gameTimeValidation(){
     else if(parseInt(input.value) > 300){
         input.value = 300;
     }
+}
+
+function showGameSettings(){
+    foodAmt.value = $('#food-slider').slider("option", "value");
+    gameTotalTime.value = gameTime.value;
+    monsterSpeed.value = $('#speed option:selected').text();
+    monsterAmt.value = $('#monster-slider').slider("option", "value");
+    upArrowShow.value = upMoveInput.value;
+    // console.log(upArrow);
+    rightArrowShow.value = rightMoveInput.value;
+    downArrowShow.value = downMoveInput.value;
+    leftArrowShow.value = leftMoveInput.value;
 }

@@ -127,13 +127,16 @@ initialize = () => {
 	$('#newgameBtn').click(function(){
 		hideAllDivs();
 		$('#mainGamePage').toggle();
+		showGameSettings();
 		context = canvas.getContext("2d");
 		Start();
 	})
 	$('#anotherGameBtn').click(function() {
 		clearInterval(interval);
-		context = canvas.getContext("2d");
-		Start();
+		// context = canvas.getContext("2d");
+		// Start();
+		hideAllDivs();
+		$('#settingsPage').toggle();
 	})
 
 }
@@ -327,9 +330,13 @@ function findRandomEmptyCell(board) {
 }
 
 function chooseFood(){
+	if(food_arr.length == 0 || food_remain == 0){
+		return 0;
+	}
 	let r = Math.floor(Math.random() * food_arr.length);
 	let kind = food_arr[r][0];
 	let kind_ball = 0;
+	
 	if(kind == "black"){
 		kind_ball = 5;
 	}
