@@ -24,7 +24,7 @@ header {
   /* padding: 0;
   margin: 0; */
   width: 100%;
-  height: 150px;
+  height: 155px;
   float: left;
 }
 
@@ -250,9 +250,35 @@ form .error {
 footer {
   color: white;
   width: 100%;
+  text-align: center;
+  height: 50px;
+  background-color: rgb(85, 85, 85);
   bottom: 0;
   float: left;
   clear: left;
+}
+
+footer p{
+  margin: 5px;
+}
+
+
+.footerName{
+  display: inline-block;
+  margin: 5px;
+}
+
+.footerName i{
+  color: #0e76a8;
+
+}
+
+.footerName a:link{
+  color: #0e76a8;
+}
+
+.footerName a:visited{
+  color: rgb(103, 103, 255);
 }
 
 .modal {

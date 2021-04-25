@@ -86,9 +86,9 @@ logginHandle = () => {
 	if(response){
 		
 		current_logged_in = username;
-		//TODO - check whether it should be here.
-		$('#registerBar').off('click');
-		$('#loginBar').off('click');
+		// //TODO - check whether it should be here.
+		// $('#registerBar').off('click');
+		// $('#loginBar').off('click');
 		
 	}
 	return false;
@@ -114,6 +114,8 @@ initialize = () => {
 	});
 	$('#registerBar').click(function(){
 		hideAllDivs();
+		endGame();
+		current_logged_in = null;
 		$('#registerPage').toggle();
 	});
 	$('#loginBtn').click(function(){
@@ -122,6 +124,8 @@ initialize = () => {
 	});
 	$('#loginBar').click(function(){
 		hideAllDivs();
+		endGame();
+		current_logged_in = null;
 		$('#loginPage').toggle();
 	});
 	$('#newgameBtn').click(function(){
@@ -132,13 +136,19 @@ initialize = () => {
 		Start();
 		$('#audio').prop("volume", 0.1);
 		document.getElementById('audio').play();
-	})
+	});
 	$('#anotherGameBtn').click(function() {
 		endGame();
 		// context = canvas.getContext("2d");
 		// Start();
 		hideAllDivs();
 		$('#settingsPage').toggle();
+	});
+	$('#pacmanBar').click(function() {
+		hideAllDivs();
+		endGame();
+		$('#welcomePage').toggle();
+		current_logged_in = null;
 	})
 
 }
