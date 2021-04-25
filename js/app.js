@@ -130,9 +130,11 @@ initialize = () => {
 		showGameSettings();
 		context = canvas.getContext("2d");
 		Start();
+		$('#audio').prop("volume", 0.1);
+		document.getElementById('audio').play();
 	})
 	$('#anotherGameBtn').click(function() {
-		clearInterval(interval);
+		endGame();
 		// context = canvas.getContext("2d");
 		// Start();
 		hideAllDivs();
@@ -708,12 +710,12 @@ function isFinished(){
 	let msg = "";
 	let gameOver = false;
 	if(pac_life == 0){
-		window.clearInterval(interval);
+		endGame();
 		msg = "Loser!";
 		gameOver = true;
 	}
 	else if (time_elapsed >= totalGameTime) {
-		window.clearInterval(interval);
+		endGame();
 		gameOver = true;
 		if (score >= 100){
 			msg = "Winner!"
@@ -740,4 +742,12 @@ function isFinished(){
 				]
 		});
 	}
+}
+
+function endGame(){
+	window.clearInterval(interval);
+	let audio = document.getElementById('audio');
+	audio.pause();
+	audio.currentTime = 0;
+
 }

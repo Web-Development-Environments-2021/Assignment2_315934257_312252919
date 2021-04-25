@@ -23,8 +23,24 @@
   border-radius: 5px;
 }
 
+.game{
+  overflow: hidden;
+}
+
+#audio{
+  display: none;
+}
+
 #canvas {
   border: solid 1px black;
   max-height: 73.5vh;
   width: 110vh;
+  /* display:inline-block; */
+  float: left;
+  
+}
+
+#settingsView {
+  float:left;
+  /* display:inline-block; */
 }
