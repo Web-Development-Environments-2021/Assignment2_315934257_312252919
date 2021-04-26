@@ -1,6 +1,6 @@
 # Pacman Game - Assignment2
  
-## Submmiting - Guy Zaidman & jonatan milver
+## Submmiting - Guy Zaidman & Jonatan Milver
 
 ### github user names and IDs
 - Guyzaidman - 312252919
