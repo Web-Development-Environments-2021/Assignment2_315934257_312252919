@@ -14,7 +14,7 @@ JonatanMilver
 This site was built using GitHub Pages and can be seen [here](https://web-development-environments-2021.github.io/Assignment2_315934257_312252919/).
 
 ### additional functionality
-- Bullet list
-  - Nested bullet
-- Bullet list2
-  - Nested bullet2
+- edible clock which adds more time to the game
+  - disappears and reappears at a random location
+  - moves randomly on the board
+- edible apple which when consumed slows down monsters for a given amount of time
