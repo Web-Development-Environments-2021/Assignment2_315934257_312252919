@@ -221,31 +221,39 @@
           <input id="lblTime" type="text" readonly />
           <label for="life">LIFE:</label>
           <input id="life" type="text" readonly />
-          <button id="anotherGameBtn">New Game</button>
+          <a id="anotherGameBtn" href="#" class="anotherGameButton">New Game</a>
         </div>
         <div id="game">
           <canvas id="canvas" height="600" width="600"></canvas>
           <div id="settingsView" class="gameInformation">
-            <h4>Game Settings</h4>
-            <label for="foodAmt">Food Amount</label>
-            <input id="foodAmt" type="text" readonly />
-            <label for="gameTotalTime">Total Time</label>
-            <input id="gameTotalTime" type="text" readonly />
+          <div class='settings'>
+              <h4>Game Settings</h4>
+              <label for="foodAmt">Food Amount</label>
+              <input id="foodAmt" type="text" readonly /><br>
+              <label for="gameTotalTime">Total Time</label>
+              <input id="gameTotalTime" type="text" readonly />
+          </div>
+          <div class='settings'>
             <h4>Monster Settings</h4>
             <label for="monsterSpeed">Monster Speed</label>
-            <input id="monsterSpeed" type="text" readonly />
+            <input id="monsterSpeed" type="text" readonly /><br>
             <label for="monsterAmt">Monster Amount</label>
             <input id="monsterAmt" type="text" readonly />
-            <h4>Keyboard Settings</h4>
-            <label for="upArrowShow">Up Arrow</label>
-            <input id="upArrowShow" type="text" readonly />
-            <label for="rightArrowShow">Right Arrow</label>
-            <input id="rightArrowShow" type="text" readonly /><br>
-            <label for="downArrowShow">Down Arrow</label>
-            <input id="downArrowShow" type="text" readonly />
-            <label for="leftArrowShow">Left Arrow</label>
-            <input id="leftArrowShow" type="text" readonly />
           </div>
+          <div class='settings'>
+              <h4>Keyboard Settings</h4>
+              <div class="up-arrow">
+                <label for="upArrowShow">&#8593;</label>
+                <input id="upArrowShow" type="text" readonly /> <br>
+              </div>
+              <label for="leftArrowShow">&#8592;</label>
+              <input id="leftArrowShow" type="text" readonly />
+              <label for="downArrowShow">&#8595;</label>
+              <input id="downArrowShow" type="text" readonly />
+              <label for="rightArrowShow">&#8594;</label>
+              <input id="rightArrowShow" type="text" readonly />
+          </div>
+        </div>
           <img
             src="./photos/red_monster_rm.png"
             alt="redMonster"
@@ -295,9 +303,7 @@
       </div>
 
       <div id="about-modal" class="modal">
-        <!-- Modal content -->
         <div class="modal-content">
-          <span class="close">&times;</span>
           <h3>Jonatan Milver, Guy Zaidman</h3>
           <p>
             We used JQuery plugins in several places during this assignment:

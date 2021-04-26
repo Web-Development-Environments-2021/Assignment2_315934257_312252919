@@ -101,7 +101,7 @@ initialize = () => {
 		password: "k"
 	}
 	users[user.username] = user;
-	toggleAbout();
+	// toggleAbout();
 	closeBtns();
 
 	// form validation
@@ -149,6 +149,25 @@ initialize = () => {
 		endGame();
 		$('#welcomePage').toggle();
 		current_logged_in = null;
+	});
+	$('#aboutMenu').click(function() {
+		$("#about-modal").dialog({
+			modal: true,
+			width: 600,
+			height: 200,
+			title: "About Us",
+			open: function() {
+				// let text = "<h3>Jonatan Milver, Guy Zaidman</h3>" + "<p>We used JQuery plugins in several places during this assignment:</p>" +
+				// "<ul>" + 
+				//   "<li>During implementing the validation of the registration form.</li>" +
+				//   "<li>We used several JQuery user interfaces such as datepicker, slider, accordion and spectrum for colors</li>" +
+				// "</ul>"
+				// $(this).html(text);
+				$('.ui-widget-overlay').bind('click', function(){
+					$('#about-modal').dialog('close');
+				})
+				},
+		});	
 	})
 
 }
