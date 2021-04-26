@@ -23,6 +23,7 @@ var monsters;
 
 // game settings
 var food_remain = 50;
+var total_food;
 var food5Color = 'black';
 var food15Color = 'red';
 var food25Color = 'blue';
@@ -189,6 +190,7 @@ function Start() {
 	pacman.x = 7;
 	pacman.y = 3;
 	food_remain = $('#food-slider').slider("option", "value");
+	total_food = food_remain;
 	pac_color = "yellow";
 	var cnt = 100;
 	totalGameTime = parseInt(gameTime.value);
@@ -696,6 +698,7 @@ function UpdatePosition() {
 	//update score
 	if([5,15,25].includes(board[pacman.x][pacman.y])){
 		score+= board[pacman.x][pacman.y];
+		total_food -- ;
 	}
 	if(pacman.x == mango.x && pacman.y == mango.y){
 		mango.show = false;
@@ -743,7 +746,7 @@ function isFinished(){
 		msg = "Loser!";
 		gameOver = true;
 	}
-	else if (time_elapsed >= totalGameTime) {
+	else if (time_elapsed >= totalGameTime || (total_food == 0 && apple.is_eaten && !mango.show)) {
 		endGame();
 		gameOver = true;
 		if (score >= 100){
