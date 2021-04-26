@@ -186,7 +186,7 @@ function hideAllDivs(){
 function Start() {
 	//general settings
 	score = 0;
-	pac_life = 1;
+	pac_life = 5;
 	pacman.x = 7;
 	pacman.y = 3;
 	food_remain = $('#food-slider').slider("option", "value");
