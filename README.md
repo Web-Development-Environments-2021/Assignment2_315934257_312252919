@@ -15,6 +15,6 @@ This site was built using GitHub Pages and can be seen [here](https://web-develo
 
 ### additional functionality
 - Bullet list
-- - Nested bullet
+  - Nested bullet
 - Bullet list2
-- - Nested bullet2
+  - Nested bullet2
