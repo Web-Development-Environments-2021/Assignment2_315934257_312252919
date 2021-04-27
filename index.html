@@ -223,37 +223,40 @@
           <input id="life" type="text" readonly />
           <a id="anotherGameBtn" href="#" class="anotherGameButton">New Game</a>
         </div>
-        <div id="game">
-          <canvas id="canvas" height="600" width="600"></canvas>
+        <div id="game">   
+          <div class="canvas-div">
+            <canvas id="canvas" height="600" width="600"></canvas>
+          </div>       
           <div id="settingsView" class="gameInformation">
-          <div class='settings'>
-              <h4>Game Settings</h4>
-              <label for="foodAmt">Food Amount</label>
-              <input id="foodAmt" type="text" readonly /><br>
-              <label for="gameTotalTime">Total Time</label>
-              <input id="gameTotalTime" type="text" readonly />
-          </div>
-          <div class='settings'>
-            <h4>Monster Settings</h4>
-            <label for="monsterSpeed">Monster Speed</label>
-            <input id="monsterSpeed" type="text" readonly /><br>
-            <label for="monsterAmt">Monster Amount</label>
-            <input id="monsterAmt" type="text" readonly />
-          </div>
-          <div class='settings'>
-              <h4>Keyboard Settings</h4>
-              <div class="up-arrow">
-                <label for="upArrowShow">&#8593;</label>
-                <input id="upArrowShow" type="text" readonly /> <br>
+              <div class='settings'>
+                  <h4>Game Settings</h4>
+                  <label for="foodAmt">Food Amount</label>
+                  <input id="foodAmt" type="text" readonly /><br>
+                  <label for="gameTotalTime">Total Time</label>
+                  <input id="gameTotalTime" type="text" readonly />
               </div>
-              <label for="leftArrowShow">&#8592;</label>
-              <input id="leftArrowShow" type="text" readonly />
-              <label for="downArrowShow">&#8595;</label>
-              <input id="downArrowShow" type="text" readonly />
-              <label for="rightArrowShow">&#8594;</label>
-              <input id="rightArrowShow" type="text" readonly />
+              <div class='settings'>
+                <h4>Monster Settings</h4>
+                <label for="monsterSpeed">Monster Speed</label>
+                <input id="monsterSpeed" type="text" readonly /><br>
+                <label for="monsterAmt">Monster Amount</label>
+                <input id="monsterAmt" type="text" readonly />
+              </div>
+              <div class='settings'>
+                  <h4>Keyboard Settings</h4>
+                  <div class="up-arrow">
+                    <label for="upArrowShow">&#8593;</label>
+                    <input id="upArrowShow" type="text" readonly /> <br>
+                  </div>
+                  <label for="leftArrowShow">&#8592;</label>
+                  <input id="leftArrowShow" type="text" readonly />
+                  <label for="downArrowShow">&#8595;</label>
+                  <input id="downArrowShow" type="text" readonly />
+                  <label for="rightArrowShow">&#8594;</label>
+                  <input id="rightArrowShow" type="text" readonly />
+              </div>
           </div>
-        </div>
+
           <img
             src="./photos/red_monster_rm.png"
             alt="redMonster"

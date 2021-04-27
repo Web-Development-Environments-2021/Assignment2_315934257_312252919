@@ -182,7 +182,6 @@ function Start() {
 	move_monsters = 0;
 	n_monsters = $('#monster-slider').slider("option", "value");
 	mon_speed = parseInt(speed.value);
-	console.log("Monster Speed:" + mon_speed);
 
 	//mango settings
 	mango.x = 4;
