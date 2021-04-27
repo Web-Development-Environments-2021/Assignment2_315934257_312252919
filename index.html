@@ -11,7 +11,6 @@
     <link rel="stylesheet" href="./css/app.css" />
     <link rel="stylesheet" href="./css/game.css" />
     <link rel="stylesheet" href="./css/settings.css" />
-    <link rel="stylesheet" href="./css/login.css" />
     <link rel="stylesheet" href="./css/welcome.css" />
 
     <!-- datepicker -->
@@ -121,7 +120,7 @@
             <p>Food Colors</p>
             <ul>
               <li>
-                5 points
+                  5 points    
                 <input id="color-picker1" type="color" value="#000000" />
               </li>
               <li>
@@ -196,14 +195,16 @@
             />
           </div>
         </div>
-        <button class="welcomeBtn" id="newgameBtn">New Game</button>
-        <button
-          class="welcomeBtn"
-          id="randomSettings"
-          onclick="randomizeSettings()"
-        >
-          Randomize Settings
-        </button>
+        <div id="settingsBtns">
+          <button class="welcomeBtn" id="newgameBtn">New Game</button>
+          <button
+            class="welcomeBtn"
+            id="randomSettings"
+            onclick="randomizeSettings()"
+          >
+            Randomize Settings
+          </button>
+        </div>
       </div>
 
       <div class="page" id="mainGamePage">

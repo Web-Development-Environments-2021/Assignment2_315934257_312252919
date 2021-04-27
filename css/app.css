@@ -128,6 +128,10 @@ ul li a:hover::after {
   margin: 2px;
 }
 
+#color-picker1{
+  margin-left: 50px;
+}
+
 .welcomeBtn:hover {
   background-color: #919191;
   color: black;
