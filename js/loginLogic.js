@@ -1,13 +1,10 @@
 loginValidation = (username, password) => {
-	// let username = $('#username').val();
-	// let password = $('#password').val();
 	if(!(username in users) || users[username].password !== password){
 		$('#loginAlert').toggle();
 		return false;
 	}
 	$('#welcomePage').hide();
 	$('#loginPage').toggle();
-	// $('#mainGamePage').toggle();
 	$('#settingsPage').toggle();
 	document.getElementById('loginForm').reset();
 	return true;

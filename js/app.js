@@ -62,6 +62,7 @@ clock.time_add;
 clock.added_time;
 
 /*
+EXPLANATION:
 user :
 {
 	username: string,
@@ -74,10 +75,6 @@ user :
 
 $(document).ready(function() {
 	initialize();
-	// $("#dialog").dialog();
-
-	// context = canvas.getContext("2d");
-	// Start();
 });
 
 logginHandle = () => {
@@ -85,12 +82,7 @@ logginHandle = () => {
 	let password = $('#password').val();
 	let response = loginValidation(username, password);
 	if(response){
-		
 		current_logged_in = username;
-		// //TODO - check whether it should be here.
-		// $('#registerBar').off('click');
-		// $('#loginBar').off('click');
-		
 	}
 	return false;
 }
@@ -102,7 +94,6 @@ initialize = () => {
 		password: "k"
 	}
 	users[user.username] = user;
-	// toggleAbout();
 	closeBtns();
 
 	// form validation
@@ -140,8 +131,6 @@ initialize = () => {
 	});
 	$('#anotherGameBtn').click(function() {
 		endGame();
-		// context = canvas.getContext("2d");
-		// Start();
 		hideAllDivs();
 		$('#settingsPage').toggle();
 	});
@@ -155,15 +144,9 @@ initialize = () => {
 		$("#about-modal").dialog({
 			modal: true,
 			width: 600,
-			height: 200,
+			height: 300,
 			title: "About Us",
 			open: function() {
-				// let text = "<h3>Jonatan Milver, Guy Zaidman</h3>" + "<p>We used JQuery plugins in several places during this assignment:</p>" +
-				// "<ul>" + 
-				//   "<li>During implementing the validation of the registration form.</li>" +
-				//   "<li>We used several JQuery user interfaces such as datepicker, slider, accordion and spectrum for colors</li>" +
-				// "</ul>"
-				// $(this).html(text);
 				$('.ui-widget-overlay').bind('click', function(){
 					$('#about-modal').dialog('close');
 				})
@@ -199,7 +182,6 @@ function Start() {
 	move_monsters = 0;
 	n_monsters = $('#monster-slider').slider("option", "value");
 	mon_speed = parseInt(speed.value);
-	// mon_speed = 6;
 	console.log("Monster Speed:" + mon_speed);
 
 	//mango settings
@@ -652,8 +634,6 @@ function UpdatePosition() {
 		clock.y = move[1];
 	}
 	move_monsters = (move_monsters+1) % mon_speed;
-
-	// console.log(mon_speed)
 	if(apple.is_eaten){
 		apple.time_amount--;
 		if(apple.time_amount == 0){
@@ -726,10 +706,6 @@ function UpdatePosition() {
 	// update time
 	var currentTime = new Date() - (clock.added_time * 1000);
 	time_elapsed = (currentTime - start_time) / 1000;
-
-	// if (score >= 20 && time_elapsed <= 10) {
-	// 	pac_color = "green";
-	// }
 }
 
 function main() {

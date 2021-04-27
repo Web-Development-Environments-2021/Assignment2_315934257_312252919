@@ -45,18 +45,14 @@
 #canvas {
   border: solid 1px black;
   max-height: 80vh;
-  /* height: fit-content; */
   width: 60%;
-  /* display:inline-block; */
   float: left;
-  
 }
 
 #settingsView {
   width: 30%;
   float:left;
   position: relative;
-  /* display:inline-block; */
 }
 
 #foodAmt{

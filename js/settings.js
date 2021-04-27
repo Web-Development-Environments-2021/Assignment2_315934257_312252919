@@ -144,7 +144,6 @@ function showGameSettings(){
     monsterSpeed.value = $('#speed option:selected').text();
     monsterAmt.value = $('#monster-slider').slider("option", "value");
     upArrowShow.value = upMoveInput.value;
-    // console.log(upArrow);
     rightArrowShow.value = rightMoveInput.value;
     downArrowShow.value = downMoveInput.value;
     leftArrowShow.value = leftMoveInput.value;

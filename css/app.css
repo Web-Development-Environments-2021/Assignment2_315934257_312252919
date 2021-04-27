@@ -8,11 +8,6 @@ html {
 }
 
 body {
-  /* background-image: url("photos/pacmanLogo.jpeg");
-  background-repeat: no-repeat;
-  background-size: cover;  */
-  /* padding: 0;
-  margin: 0; */
   font-family: Roboto, sans-serif;
   background-image: url("../photos/cover.jpg");
   background-repeat: no-repeat;
@@ -21,8 +16,6 @@ body {
 }
 
 header {
-  /* padding: 0;
-  margin: 0; */
   width: 100%;
   height: 155px;
   float: left;
@@ -42,15 +35,12 @@ header {
   justify-content: center;
   text-align: center;
   background: #000000;
-  /* height: 101vh;
-  width: 12.3vh; */
 }
 
 #content {
-  /* margin: 20px; */
+
   width: 100%;
   height: 600px;
-  /* min-height: 100%; */
   display: block;
   position: relative;
   float: left;
@@ -159,8 +149,6 @@ ul li a:hover::after {
 #monster-slider {
   height: 15px;
   width: 10%;
-
-  /* padding-left: 5px;  */
 }
 
 #monster-custom-handle {
@@ -289,6 +277,7 @@ footer p{
   border: 1px solid #888; 
   width: 80%;
 }
+
 
 .modal-content h3 {
   color: #0e76a8;
