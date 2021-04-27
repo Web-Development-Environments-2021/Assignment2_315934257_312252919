@@ -57,6 +57,7 @@
 
       <div class="page" id="registerPage">
         <div class="registrationLogin">
+
           <form
             name="regForm"
             id="regForm"
@@ -64,25 +65,26 @@
             onsubmit="return registration()"
             method="GET"
           >
-            <label for="userNameIn">User name:</label><br />
-            <input type="text" id="userNameIn" name="userNameIn" /><br />
+          <h2>Register</h2><br/>
+            <!-- <label for="userNameIn">User name:</label><br /> -->
+            <input type="text" id="userNameIn" name="userNameIn" placeholder="Username"/><br />
             <div class="alert" id="usernameAlert" style="display: none">
               <span class="closebtn">&times;</span>
               Username already exists.
             </div>
-            <label for="passwordIn">Password:</label><br />
-            <input type="password" id="passwordIn" name="passwordIn" /><br />
+            <!-- <label for="passwordIn">Password:</label><br /> -->
+            <input type="password" id="passwordIn" name="passwordIn" placeholder="Password"/><br />
 
-            <label for="fullName">Full name:</label><br />
-            <input type="text" id="fullName" name="fullName" /><br />
+            <!-- <label for="fullName">Full name:</label><br /> -->
+            <input type="text" id="fullName" name="fullName" placeholder="Enter your full name"/><br />
 
-            <label for="emailIn">e-mail:</label><br />
-            <input type="text" id="emailIn" name="emailIn" /><br />
+            <!-- <label for="emailIn">e-mail:</label><br /> -->
+            <input type="text" id="emailIn" name="emailIn" placeholder="Enter your email address"/><br />
 
-            <label for="datepicker">Birthdate:</label><br />
-            <input type="text" id="datepicker" name="datepicker" /><br />
+            <!-- <label for="datepicker">Birthdate:</label><br /> -->
+            <input type="text" id="datepicker" name="datepicker" placeholder="Birthdate"/><br />
 
-            <input type="submit" value="Submit" />
+            <input class="submitBtn" type="submit" value="Submit" />
           </form>
         </div>
       </div>
@@ -91,20 +93,20 @@
         <div class="registrationLogin">
           <form onsubmit="return logginHandle();" id="loginForm" method="POST">
             <!-- action route should be changed-->
-            <h2>Login</h2>
+            <h2>Login</h2><br/>
             <input
               type="text"
               name="username"
               placeholder="Username"
               id="username"
-            />
+            /><br />
             <input
               type="password"
               name="password"
               placeholder="Password"
               id="password"
-            />
-            <input type="submit" value="Login" />
+            /><br />
+            <input class="submitBtn" type="submit" value="Login" />
             <div class="alert" id="loginAlert" style="display: none">
               <span class="closebtn">&times;</span>
               Wrong username/password, please enter valid details.

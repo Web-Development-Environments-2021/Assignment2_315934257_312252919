@@ -17,4 +17,6 @@
 
 #settingsBtns{
   height: 15%;
+  width: 40%;
+  margin: auto;
 }

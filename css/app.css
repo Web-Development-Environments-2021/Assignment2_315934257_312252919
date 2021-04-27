@@ -153,6 +153,15 @@ ul li a:hover::after {
   color: white;
 }
 
+#accordion{
+  width: 60%;
+  margin: 0 20%;
+}
+
+#accordion input{
+  width:6em;
+}
+
 #monster-slider {
   height: 15px;
   width: 10%;
@@ -176,12 +185,15 @@ ul li a:hover::after {
 }
 
 .registrationLogin {
-  width: 500px;
+  width: 30%;
+  /* height: 100%; */
   margin: 25px auto;
 }
 
+
 form {
   padding: 20px;
+  height: 100%;
   background-color: rgba(119, 119, 119, 0.5);
   color: #fff;
   -moz-border-radius: 4px;
@@ -218,6 +230,10 @@ form .error {
   color: #ff0000;
 }
 
+form h2{
+  text-align: center;
+}
+
 .alert {
   padding: 20px;
   background-color: #f44336;
@@ -225,6 +241,21 @@ form .error {
   opacity: 1;
   transition: opacity 0.6s;
   margin-bottom: 15px;
+}
+
+.submitBtn{
+  border-radius: 5px;
+  width: 33%;
+  margin: 0 33%;
+  transition-duration: 0.4s;
+  background-color: transparent;
+  color: white;
+  border: 2px solid #919191;
+}
+
+.submitBtn:hover{
+  background-color: #ffffff; /* Green */
+  color: black;
 }
 
 .closebtn {
