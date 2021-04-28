@@ -1,4 +1,8 @@
 loginValidation = (username, password) => {
+	/**
+	 * validates that the user is registered in the system
+	 * and the password provided is associated to the user
+	 */
 	if(!(username in users) || users[username].password !== password){
 		$('#loginAlert').toggle();
 		return false;
@@ -11,6 +15,9 @@ loginValidation = (username, password) => {
 }
 
 closeBtns = () => {
+	/* 
+	closes error message in login page with pressing the X button
+	*/
 	let close = document.getElementsByClassName("closebtn");
 	let i;
 

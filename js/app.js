@@ -28,7 +28,6 @@ var food5Color = 'black';
 var food15Color = 'red';
 var food25Color = 'blue';
 var totalGameTime;
-
 var food_arr;
 
 // player settings
@@ -167,6 +166,9 @@ function hideAllDivs(){
 
 
 function Start() {
+	/*
+	generates a new game from scartch and resets all settings
+	*/
 	//general settings
 	score = 0;
 	pac_life = 5;
@@ -281,7 +283,6 @@ function Start() {
 }
 
 function gotCaught(){
-	
 	score -= 10;
 	pac_life -= 1;
 
@@ -344,6 +345,10 @@ function findRandomEmptyCell(board) {
 }
 
 function chooseFood(){
+	/* 
+	randomly choose a type of food with the
+	given distrubution asked in thr assignment
+	*/
 	if(food_arr.length == 0 || food_remain == 0){
 		return 0;
 	}
@@ -516,6 +521,9 @@ function pacman_draw(center){
 }
 
 function possibleMove(x, y){
+	/*
+	checks whether position (x,y) is a valid position to move to
+	*/
 	try{
 		if(board[x][y] != 4 && (x < 10 && x >= 0) && (y < 10 && y >= 0)){
 			for(let i=0; i<monsters.length; i++){
@@ -563,6 +571,10 @@ function findRandomPossibleMove(x, y, remove){
 }
 
 function UpdatePosition() {
+	/*
+	updates the positions of all objects on the board
+	 */
+
 	if(move_monsters == 0){
 
 		// monsters movement
@@ -708,12 +720,19 @@ function UpdatePosition() {
 }
 
 function main() {
+	/*
+	main game loop
+	*/
 	UpdatePosition();
 	Draw();
 	isFinished();
 }
 
 function isFinished(){
+	/*
+	checks if one of end game conditions is true
+	and raise the appropriate message if so
+	*/
 	let msg = "";
 	let gameOver = false;
 	if(pac_life == 0){
