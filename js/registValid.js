@@ -1,8 +1,10 @@
 addRules = () => {
-	
+	/**
+	 * adding custom made rules to JQuery validator
+	 */
+
 	// password check
 	jQuery.validator.addMethod("pwcheck", function(value) {
-		// return /^[A-Za-z0-9\d=!\-@._*]*$/.test(value) // consists of only these
 		return /^[A-Za-z0-9]*$/.test(value) // consists of only these
 			&& /\d/.test(value) // has a digit
 			&& /[A-Za-z]/.test(value) // has a character
@@ -14,6 +16,10 @@ addRules = () => {
 }
 
 registration = () => {
+	/**
+	 * checks if all input to form is valid,
+	 * if so registered the new user to the "database"
+	 */
 	if($('#regForm').valid()){
 		let username = $('#userNameIn').val();
 		if(username in users){
